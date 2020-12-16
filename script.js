@@ -17,10 +17,34 @@ const $C = document.getElementById('C')
 let $picker = document.getElementById('picker')
 const DateTime = luxon.DateTime
 let now = DateTime.local()
+let hourMinute= now.toFormat('T')
+let second = now.toFormat('ss')
+let displayA = now.toFormat('t')
+let displayB = now.toFormat('tt')
+let displayC = now.toFormat('TT')
+let hour=now.toFormat('h')
+let minute=now.toFormat('mm')
+let meridiem = now.toFormat('a')
 let h = now.toFormat('HH')
 let D = now.toISODate()
-let currentFormat = '3'
+let currentFormat ='3'
 console.log(currentFormat)
+
+
+
+//check if we need to use localStorage data when page onload
+switch (true){
+    case ('optionColor' in localStorage): 
+        console.log('colorRest')
+        $picker.value = localStorage.getItem('optionColor') 
+        setColor(1)
+      
+    case ('optionTime' in localStorage): 
+        console.log('formatReset')
+        currentFormat=localStorage.getItem('optionTime')
+        console.log('currentformat from localStorage: ', currentFormat)       
+}           
+//learned that by default, window.onload is fired when the entire page loads, not effiecient here 
 // console.log(D)
 // console.log(now.toHTTP())
 // console.log(now.toISOWeekDate())
@@ -28,6 +52,8 @@ console.log(currentFormat)
 // console.log(now.toFormat('W'))
 // console.log(now.toFormat('o'))
 // console.log(now.toFormat('HH'))
+
+
 
 //connect to AOS library
 AOS.init();
@@ -37,20 +63,19 @@ AOS.init();
 //display time 
 //update center time every minute using setInterval function 
 //add four types of time format in the settings
-//change "time format" according to the setting
 setInterval(
     (function t() {
-    let now = DateTime.local()
+    now = DateTime.local()
     //console.log(now.toFormat('tt'))
     //$time.textContent = now.toFormat('tt')  
-    let hourMinute= now.toFormat('T')
-    let second = now.toFormat('ss')
-    let displayA = now.toFormat('t')
-    let displayB = now.toFormat('tt')
-    let displayC = now.toFormat('TT')
-    let hour=now.toFormat('h')
-    let minute=now.toFormat('mm')
-    let meridiem = now.toFormat('a')
+    hourMinute= now.toFormat('T')
+    second = now.toFormat('ss')
+    displayA = now.toFormat('t')
+    displayB = now.toFormat('tt')
+    displayC = now.toFormat('TT')
+    hour=now.toFormat('h')
+    minute=now.toFormat('mm')
+    meridiem = now.toFormat('a')
     h = now.toFormat('HH')
 
     $A.innerHTML=displayA
@@ -73,22 +98,48 @@ setInterval(
             break
         default:
             $time.innerHTML='<span class="big">'+ hourMinute+ '</span>'+' '+':'+'<span>'+second+'</span>'
-
-    }
-
-    function addContent(format){
-        console.log('test')
-        currentFormat = format
-    }
-
-    $A.addEventListener('click', function(){addContent('0')})
-    $B.addEventListener('click', function(){addContent('1')})
-    $bB.addEventListener('click', function(){addContent('2')})
-    $C.addEventListener('click', function(){addContent('3')})
+    }   
    
     return t
     })
-(), 500)
+(), 666)
+
+
+//change time display format according to the setting
+//store new time format into local storage
+function addContent(format){
+    console.log('test')
+    currentFormat = format
+
+    //put format setting in local storage
+    localStorage.setItem('optionTime',currentFormat)   
+}
+
+$A.addEventListener('click', function(){addContent('0')})
+$B.addEventListener('click', function(){addContent('1')})
+$bB.addEventListener('click', function(){addContent('2')})
+$C.addEventListener('click', function(){addContent('3')})
+
+
+
+//change color accoridng to the setting
+//store new color input into local storage
+function setColor(annaParam) {
+    let colorInput = $picker.value
+    console.log($picker.value)
+    document.body.style.color=colorInput
+    $button.style.color=colorInput
+    $A.style.color=colorInput
+    $B.style.color=colorInput
+    $bB.style.color=colorInput
+    $C.style.color=colorInput
+    
+    if(!(annaParam === 1)){
+        localStorage.setItem('optionColor', $picker.value)
+    } 
+}
+
+$picker.addEventListener('input', setColor)
 
 
 
@@ -141,28 +192,14 @@ $icon.addEventListener('click',function(){
 
 
 
-//change color according to the setting
-$picker.addEventListener('input',function(){
-    let colorInput = $picker.value
-    console.log($picker.value)
-    document.body.style.color=colorInput
-    $button.style.color=colorInput
-    $A.style.color=colorInput
-    $B.style.color=colorInput
-    $bB.style.color=colorInput
-    $C.style.color=colorInput
-})
 
-
-
-// add background apod img 
+// add background apod img with gradient
 fetch(`https://api.nasa.gov/planetary/apod?api_key=PiwYsGeAh0it8JO47wAsvP49H6YHzTPl7fbpnc6g&date=${D}`)
     .then(response=>response.json())
     .then(data =>{
         console.log(data)
-        console.log(data.title)
         console.log(data.url)
-        $container.style.backgroundImage = `url(${data.url})`
+        $container.style.backgroundImage = `linear-gradient(to bottom, rgba(166,198,232,0), rgba(166,198,232,0.5)),url(${data.url})`
     })
     .catch(error=>{
         console.log(error.name, error.message)
