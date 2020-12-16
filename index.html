@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="luxon.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+</head>
+<body>
+    <div id="container">
+        <h1 class="greeting" data-aos="zoom-in"></h1>
+        <div id="time"></div>
+        <button data-aos="fade-up" data-aos-duration="2000">More Date Info</button>
+        <div class="more"></div>
+        
+        <i class="fa fa-cog fa-spin"></i>
+        <ul id ="setting">
+            <li id="display">Customize Time Format</li>
+                <ul class="change">
+                    <li id="A"></li>
+                    <li id="B"></li>
+                    <li id="bB"></li>  
+                    <li id="C"></li> 
+                </ul>
+            <li id="color">Customize Font Color</li>
+                <ul class="choose">
+                    <li><input type="color" id="picker"></li>
+                </ul>    
+        </ul> 
+    </div>
+    
+    <!-- <div class="imgbox"><img id="apod"></div> -->
+      
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

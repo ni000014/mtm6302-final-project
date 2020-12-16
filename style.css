@@ -1,0 +1,230 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*reset ends*/
+
+/**style mobile version**/
+html{   
+    color:white;
+    font-family: 'Orbitron', sans-serif;
+    font-size:20px;
+}
+
+.big{
+    font-size:150%;
+}
+
+#container{
+    height:560px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size:auto;
+}
+
+button, .more, .greeting{
+    padding:5px;
+    margin:20px;
+}
+
+button{
+    font-family:'Poppins', sans-serif;
+    padding:8px;
+    border:none;
+    border-radius:20px;
+}
+
+button:hover{
+    background-color:rgb(190, 229, 241);
+    color:rgb(7, 51, 107);
+    border-style: inset;
+}
+
+button:focus{
+    outline:0;
+}
+
+.more{ 
+    font-family: 'Poppins', sans-serif;
+    font-size:18px;
+    text-align: center;
+    line-height: 25px;
+    margin-top:0;
+}
+
+.more.show{
+    display:block;
+}
+
+.more{
+    display:none;
+}
+/*visibility:hidden will keep the element in the page and occupies that space*/
+
+
+/*style the settings icon*/
+.fa{
+    color:white;
+    position:fixed;
+    right:5%;
+    bottom:5%;
+}
+
+.fa:hover{
+    animation:0;
+    color:rgb(190, 229, 241);
+}
+
+#setting{
+    font-size:15px;
+    font-family: 'Poppins', sans-serif;
+    position:fixed;
+    right:15%;
+    bottom:5%;
+    display:none;
+}
+
+#display, #color{
+    padding:5px;
+} 
+
+/* .change, .choose{
+    display:none;
+} */
+
+/* .change.show, .choose.show{
+    display:block;    
+} */
+
+/* .change.show{
+    margin-bottom:8px;
+} */
+
+#setting.show{
+    display:block;    
+}
+
+.change{
+    margin-bottom:8px;
+} 
+
+.change li{
+    margin:3px;
+    background-color: white;
+    border-radius:8px;
+    padding:3px 10px;
+    color:rgb(7, 51, 107);
+}
+
+.change li:hover, #picker:hover{
+    background-color: rgb(190, 229, 241);  
+    cursor:pointer;    
+}
+
+/**style the tablet version **/
+@media screen and (min-width: 765px){
+    html{
+        font-size:50px;
+    }
+    #container{
+        height:950px;
+    }
+    button, .more{
+        font-size:30px;
+        margin:30px;
+    }
+    .more{
+        line-height:40px;
+        margin-top:0;
+    }
+    .greeting{
+        margin:30px;
+    }
+    button{
+        padding:10px;
+        border-radius:25px;
+    }
+    #setting{
+        font-size:25px;
+    }
+    .change li{
+        margin:5px;
+        border-radius:20px;
+        padding:5px 20px;
+    }
+    .change.show{
+        margin-bottom:15px;
+    }
+    #picker{
+        margin:5px;
+        height:37.5px;
+        width:66px;
+    }
+
+}
+
+/**style the desktop version **/
+@media screen and (min-width: 992px){
+    html{
+        font-size:80px;
+    }
+    button, .more{
+        font-size:40px;
+    }
+    .more{
+        line-height:55px;
+    }
+    button{
+        padding:15px;
+        border-radius:35px;
+    }
+    
+}
